@@ -6,28 +6,34 @@ const numCharCodes = 26;
 export function createCodeArray(): string[] {
     const codeArray = new Array(numCharCodes * numCharCodes);
     let codeIndex = 0;
+
     for (let i = 0; i < numCharCodes; i++) {
         for (let j = 0; j < numCharCodes; j++) {
             codeArray[codeIndex++] = String.fromCharCode(97 + i) + String.fromCharCode(97 + j);
         }
     }
+
     return codeArray;
 }
 
-let darkDataUriCache: { [index: string]: vscode.Uri } = {};
-let lightDataUriCache: { [index: string]: vscode.Uri } = {};
+const darkDataUriCache = new Map<string, vscode.Uri>();
+const lightDataUriCache = new Map<string, vscode.Uri>();
 
 export interface Decoration {
     bgColor: string;
     fgColor: string;
-
     fontFamily: string;
     fontSize: number;
 }
 
 export function createDataUriCaches(codeArray: string[], darkDecoration: Decoration, lightDecoration: Decoration) {
-    codeArray.forEach(code => (darkDataUriCache[code] = getSvgDataUri(code, darkDecoration)));
-    codeArray.forEach(code => (lightDataUriCache[code] = getSvgDataUri(code, lightDecoration)));
+    codeArray.forEach((code) => {
+        darkDataUriCache.set(code, getSvgDataUri(code, darkDecoration));
+    });
+
+    codeArray.forEach((code) => {
+        lightDataUriCache.set(code, getSvgDataUri(code, lightDecoration));
+    });
 }
 
 export function getCodeIndex(code: string): number {
@@ -80,12 +86,12 @@ export function createDecorationOptions(
         renderOptions: {
             dark: {
                 after: {
-                    contentIconPath: darkDataUriCache[code],
+                    contentIconPath: darkDataUriCache.get(code),
                 },
             },
             light: {
                 after: {
-                    contentIconPath: lightDataUriCache[code],
+                    contentIconPath: lightDataUriCache.get(code),
                 },
             },
         },

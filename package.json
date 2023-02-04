@@ -1,13 +1,13 @@
 {
-    "name": "vscode-jumpy",
-    "displayName": "jumpy",
+    "name": "vscode-jumpy4",
+    "displayName": "jumpy4",
     "description": "Jumpy provides fast cursor movement, inspired by Atom's package of the same name.",
     "icon": "images/jumpy-icon.png",
     "license": "MIT",
-    "version": "0.3.1",
-    "publisher": "wmaurer",
+    "version": "0.3.2",
+    "publisher": "alistaiir",
     "engines": {
-        "vscode": "^1.24.0"
+        "vscode": ">=1.75.0"
     },
     "categories": [
         "Other"
@@ -24,17 +24,12 @@
     ],
     "repository": {
         "type": "git",
-        "url": "https://github.com/wmaurer/vscode-jumpy.git"
+        "url": "https://github.com/alii/vscode-jumpy.git"
     },
     "bugs": {
-        "url": "https://github.com/wmaurer/vscode-jumpy/issues"
+        "url": "https://github.com/alii/vscode-jumpy/issues"
     },
-    "homepage": "https://github.com/wmaurer/vscode-jumpy/blob/master/README.md",
-    "activationEvents": [
-        "onCommand:extension.jumpy-word",
-        "onCommand:extension.jumpy-line",
-        "onCommand:extension.jumpy-exit"
-    ],
+    "homepage": "https://github.com/alii/vscode-jumpy/blob/master/README.md",
     "main": "./out/src/extension",
     "contributes": {
         "commands": [
@@ -102,17 +97,16 @@
         "vscode:prepublish": "npm run compile",
         "compile": "tsc -p ./",
         "watch": "tsc -watch -p ./",
-        "postinstall": "node ./node_modules/vscode/bin/install",
         "test": "npm run compile && node ./node_modules/vscode/bin/test",
         "format": "prettier ./**/*.{ts,json} --write"
     },
     "devDependencies": {
-        "@types/mocha": "^2.2.32",
-        "@types/node": "^6.0.45",
-        "mocha": "^5.2.0",
-        "prettier": "^1.13.5",
-        "tslint": "^3.15.1",
-        "typescript": "^2.6.1",
-        "vscode": "^1.1.6"
+        "@types/mocha": "^10.0.1",
+        "@types/node": "^18.11.18",
+        "@types/vscode": "^1.75.0",
+        "mocha": "^10.2.0",
+        "prettier": "^2.8.3",
+        "tslint": "^5.20.1",
+        "typescript": "^4.9.5"
     }
 }

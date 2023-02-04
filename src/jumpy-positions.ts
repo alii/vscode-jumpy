@@ -4,9 +4,12 @@ export interface JumpyPosition {
     charOffset: number;
 }
 
-export interface JumpyFn {
-    (maxDecorations: number, firstLineNumber: number, lines: string[], regexp: RegExp): JumpyPosition[];
-}
+export type JumpyFn = (
+    maxDecorations: number,
+    firstLineNumber: number,
+    lines: string[],
+    regexp: RegExp,
+) => JumpyPosition[];
 
 export function jumpyWord(
     maxDecorations: number,
@@ -16,9 +19,11 @@ export function jumpyWord(
 ): JumpyPosition[] {
     let positionIndex = 0;
     const positions: JumpyPosition[] = [];
+
     for (let i = 0; i < lines.length && positionIndex < maxDecorations; i++) {
         let lineText = lines[i];
         let word: RegExpExecArray;
+
         while (!!(word = regexp.exec(lineText)) && positionIndex < maxDecorations) {
             positions.push({
                 line: i + firstLineNumber,
@@ -27,6 +32,7 @@ export function jumpyWord(
             });
         }
     }
+
     return positions;
 }
 
@@ -38,6 +44,7 @@ export function jumpyLine(
 ): JumpyPosition[] {
     let positionIndex = 0;
     const positions: JumpyPosition[] = [];
+
     for (let i = 0; i < lines.length && positionIndex < maxDecorations; i++) {
         if (!lines[i].match(regexp)) {
             positions.push({
@@ -47,5 +54,6 @@ export function jumpyLine(
             });
         }
     }
+
     return positions;
 }

@@ -1,4 +1,7 @@
-# Jumpy Extension for Visual Studio Code
+# Jumpy4 Extension for Visual Studio Code
+
+> **Info:**
+> This is a fork of the original Jump extension by wmaurer.
 
 ## Feature Overview
 
